@@ -5,14 +5,18 @@ const body = document.querySelector("body");
 zipForm.addEventListener("submit", getLocationInfo);
 body.addEventListener("click", deleteLocation);
 
+
 function getLocationInfo(e) {
   e.preventDefault();
+
+  // Get country from select
+  const country = document.querySelector("#country").value;
 
   //    Get zip value from input
   const zip = document.querySelector(".zip").value;
 
   //   Make request
-  fetch(`http://api.zippopotam.us/it/${zip}`)
+  fetch(`http://api.zippopotam.us/${country}/${zip}`)
 
   // --------------------------------------------------------------------
     .then((response) => {
@@ -48,20 +52,22 @@ function getLocationInfo(e) {
       data.places.forEach((place) => {
 
         output += `
-              <article class="message is-primary">
-                <div class="message-header">
-                  <p>Location Info</p>
-                  <button class="delete"></button>
-                </div>
-                <div class="message-body">
-                  <ul>
-                    <li><strong>City: </strong>${place["place name"]}</li>
-                    <li><strong>State/Region: </strong>${place["state"]}</li>
-                    <li><strong>Longitude: </strong>${place["longitude"]}</li>
-                    <li><strong>Latitude: </strong>${place["latitude"]}</li>
-                  </ul>
-                </div>
-              </article>
+          <div class="column is-one-third">
+            <article class="message is-primary">
+              <div class="message-header">
+                <p>Location Info</p>
+                <button class="delete"></button>
+              </div>
+              <div class="message-body">
+                <ul>
+                  <li><strong>City: </strong>${place["place name"]}</li>
+                  <li><strong>State/Region: </strong>${place["state"]}</li>
+                  <li><strong>Longitude: </strong>${place["longitude"]}</li>
+                  <li><strong>Latitude: </strong>${place["latitude"]}</li>
+                </ul>
+              </div>
+            </article>
+          </div>
             `;
 
         console.log(place["place name"]);
@@ -69,7 +75,11 @@ function getLocationInfo(e) {
       });
 
       // Insert into output div
-      document.querySelector("#output").innerHTML = output;
+      document.querySelector("#output").innerHTML = `
+        <div class="columns is-multiline">
+          ${output}
+        </div>
+      `;
 
       console.log(data);
     })
@@ -79,6 +89,7 @@ function getLocationInfo(e) {
     .catch(err => console.log(err))
 }
 
+// Show check or remove icon
 function showIcon(icon){
 
   // Clear icons
@@ -90,6 +101,7 @@ function showIcon(icon){
 
 }
 
+// Delete location card
 function deleteLocation(e){
 
   // if (e.target.className == "delete") {
@@ -102,14 +114,20 @@ function deleteLocation(e){
   if (e.target.classList.contains("delete")) { 
     
     // Rimuove solo la card cliccata 
-    e.target.closest(".message").remove(); 
+    const card = e.target.closest(".column"); 
+
+    // 1. Aggiungo la classe di animazione 
+    card.classList.add("slide-out"); 
+    
+    // 2. Aspetto la fine dell’animazione e poi rimuovo 
+    setTimeout(() => { 
+      card.remove(); 
+    }, 500); // deve combaciare con il transition del CSS
     
     // Reset input 
     document.querySelector(".zip").value = ""; 
     
     // Nasconde l’icona di successo 
-    document.querySelector(".icon-check").style.display = "none"; }
+    document.querySelector(".icon-check").style.display = "none"; 
+  }
 }
-
-// Provare a collegare uno stato qualsiasi oltre l'italia e mettere il codice postale delle sue città
-// Con una select o option
