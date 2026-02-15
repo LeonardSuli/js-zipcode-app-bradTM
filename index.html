@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.4/css/bulma.min.css"
+        integrity="sha512-yh2RE0wZCVZeysGiqTwDTO/dKelCbS9bP2L94UvOFtl/FKXcNAje3Y2oBg/ZMZ3LS1sicYk4dYVGtDex75fvvA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Location Finder</title>
+    <style>
+        .icon-remove,
+        .icon-check {
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
-    
+
+    <section class="hero hero-body is-dark container">
+
+        <h1 class="title">Italy Location Info</h1>
+        <h2 class="subtitle">Enter a zipcode to get the location info</h2>
+
+        <form id="zipForm">
+            <div class="field">
+                <div class="control has-icons-left has-icons-right">
+
+                    <input class="input zip is-large" type="text" placeholder="Enter Zipcode">
+
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-map-pin"></i>
+                    </span>
+
+                    <span class="icon is-small is-right icon-check">
+                        <i class="fa fa-check"></i>
+                    </span>
+
+                    <span class="icon is-small is-right icon-remove">
+                        <i class="fa fa-remove"></i>
+                    </span>
+
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <br>
+
+    <div class="container">
+        <div id="output"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
