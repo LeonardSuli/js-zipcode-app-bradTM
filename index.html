@@ -16,6 +16,12 @@
         .icon-check {
             display: none;
         }
+
+        .slide-out {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
     </style>
 </head>
 
@@ -23,12 +29,22 @@
 
     <section class="hero hero-body is-dark container">
 
-        <h1 class="title">Italy Location Info</h1>
+        <h1 class="title">Location Info</h1>
         <h2 class="subtitle">Enter a zipcode to get the location info</h2>
 
         <form id="zipForm">
             <div class="field">
+
+                <select id="country" class="select mb-3">
+                    <option value="it">Italy (00010 - 98168)</option>
+                    <option value="us">USA (00210 - 99950)</option>
+                    <option value="de">Germany (01067 - 99998)</option>
+                    <option value="fr">France (01000 - 98799)</option>
+                    <option value="es">Spain (01001 - 52080)</option>
+                </select>
+
                 <div class="control has-icons-left has-icons-right">
+
 
                     <input class="input zip is-large" type="text" placeholder="Enter Zipcode">
 
